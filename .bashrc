@@ -23,6 +23,3 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 gitBranch='$(__git_ps1 "[%s]")'
 export PS1="\u@\h:\[$red\]\w\[$cyan\]$gitBranch\[$norm\]$ "
-
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
