@@ -3,6 +3,16 @@ WORKING_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORKING_DIR/.git-completion.bash"
 source "$WORKING_DIR/.git-prompt.sh"
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export TESSDATA_PREFIX=/Users/amast/Repositories/OCRServer
 
