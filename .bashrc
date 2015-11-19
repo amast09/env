@@ -6,7 +6,7 @@ source "$WORKING_DIR/.git-prompt.sh"
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export TESSDATA_PREFIX=/Users/amast/Repositories/OCRServer
 
-alias ll='ls -FhlG'
+alias ll='ls -aFhlG'
 alias rls='ls'
 alias c='clear'
 
