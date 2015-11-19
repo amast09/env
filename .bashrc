@@ -16,7 +16,7 @@ HISTCONTROL=ignoredups:ignorespace
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export TESSDATA_PREFIX=/Users/amast/Repositories/OCRServer
 
-alias ll='ls -aFhlG'
+alias ll='ls -aFhlG --color=auto'
 alias rls='ls'
 alias c='clear'
 alias vim="vim -u $WORKING_DIR/.vimrc"
