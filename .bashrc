@@ -19,6 +19,7 @@ export TESSDATA_PREFIX=/Users/amast/Repositories/OCRServer
 alias ll='ls -aFhlG'
 alias rls='ls'
 alias c='clear'
+alias vim="vim -u $WORKING_DIR/.vimrc"
 
 #color prompt
 green="\e[1;32m";
@@ -28,7 +29,6 @@ cyan="\e[1;36m";
 blue="\e[1;34m";
 norm="\e[0m";
 
-ln -s "$WORKING_DIR/.vimrc" "$HOME/.vimrc"
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWDIRTYSTATE=1
 
