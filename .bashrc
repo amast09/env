@@ -22,15 +22,18 @@ alias c='clear'
 alias vim="vim -u $WORKING_DIR/.vimrc"
 
 #color prompt
-green="\e[1;32m";
-yellow="\e[1;33m";
-red="\e[1;31m";
-cyan="\e[1;36m";
-blue="\e[1;34m";
+green="\e[32m";
+yellow="\e[33m";
+red="\e[31m";
+cyan="\e[36m";
+blue="\e[34m";
 norm="\e[0m";
 
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWDIRTYSTATE=1
 
+# Make history command include timestamp
+HISTTIMEFORMAT="%F %T "
+
 gitBranch='$(__git_ps1 "[%s]")'
-export PS1="\u@\h:\[$red\]\w\[$cyan\]$gitBranch\[$norm\]$ "
+export PS1="\[$green\]\u@\h:\[$red\]\w\[$cyan\]$gitBranch\[$norm\]$ "
