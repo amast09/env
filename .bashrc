@@ -1,7 +1,4 @@
-WORKING_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source "$WORKING_DIR/.git-completion.bash"
-source "$WORKING_DIR/.git-prompt.sh"
+WORKING_DIR=$(dirname "$0")
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -13,11 +10,7 @@ HISTCONTROL=ignoredups:ignorespace
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-export LSCOLORS=dxfxcxdxbxegedabagacad
-export TESSDATA_PREFIX=/Users/amast/Repositories/OCRServer
-
-alias ll='ls -aFhlG --color=auto'
-alias rls='ls'
+alias ll='ls -aFhlG'
 alias c='clear'
 alias vim="vim -u $WORKING_DIR/.vimrc"
 
@@ -29,11 +22,27 @@ cyan="\e[36m";
 blue="\e[34m";
 norm="\e[0m";
 
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWDIRTYSTATE=1
-
 # Make history command include timestamp
 HISTTIMEFORMAT="%F %T "
 
-gitBranch='$(__git_ps1 "[%s]")'
-export PS1="\[$green\]\u@\h:\[$red\]\w\[$cyan\]$gitBranch\[$norm\]$ "
+# Find and set branch name var if in git repository.
+git_branch_name() {
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+   :
+  elif [ -z "$(git status --porcelain)" ]; 
+  then
+   echo '('$branch')'
+  else
+   echo '('$branch'*)'
+  fi
+}
+
+# Linux Bash
+export PS1='\[$green\]\u@\h:\[$red\]\w\[$cyan\]$(git_branch_name)\[$norm\]$ '
+
+# ZSH MacOS
+set -o PROMPT_SUBST
+PROMPT='%F{magenta}%T%f-%F{green}%n%f%F{green}@%f%F{green}%m%f:%F{red}%d%f%F{blue}$(git_branch_name)%f$ '
+
