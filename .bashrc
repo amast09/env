@@ -134,7 +134,8 @@ stty start undef
 
 function tmux-start {
   local session=$1
-  [ -z "$session" ] && session=`whoami`
+  # BEFORE: [ -z "$session" ] && session=`whoami`
+  [ -z "$session" ] && session="amast"
   tmux -S /tmp/$session new-session -s $session -d
   chmod 777 /tmp/$session
   tmux -S /tmp/$session attach -t $session
@@ -170,10 +171,11 @@ function tmux-watch {
   tmux -S /tmp/$1 attach -t $1 -r
 }
 
-# This makes Control+U delete all characters before the cursor
-bindkey \^U backward-kill-line
+bindkey -e
 
 alias ll="ls -al"
+export LANG="en_US.utf-8"
+export LC_ALL="en_US.utf-8"
 
 tmux-start
 
