@@ -134,8 +134,7 @@ stty start undef
 
 function tmux-start {
   local session=$1
-  # BEFORE: [ -z "$session" ] && session=`whoami`
-  [ -z "$session" ] && session="amast"
+  [ -z "$session" ] && session=`whoami`
   tmux -S /tmp/$session new-session -s $session -d
   chmod 777 /tmp/$session
   tmux -S /tmp/$session attach -t $session
@@ -147,35 +146,12 @@ function tmux-join {
   tmux -S /tmp/$1 new-session -t $1
 }
 
-function tmux-start-cc {
-  local session=$1
-  [ -z "$session" ] && session=`whoami`
-  tmux -S /tmp/$session new-session -s $session -d
-  chmod 777 /tmp/$session
-  tmux -S /tmp/$session -CC attach -t $session
-}
-
-function tmux-join-cc {
-  local session=$1
-  [ -z "$session" ] && session="pair"
-  tmux -S /tmp/$1 -CC new-session -t $1
-}
-
-function tmux-list {
-  ps -eo ruser,command | grep '[n]ew-session -s' | ruby -ne '$_ =~ /^(\w+).*-s (\w+)/; puts "#{$1} started #{$2}"'
-}
-
-function tmux-watch {
-  local session=$1
-  [ -z "$session" ] && session="pair"
-  tmux -S /tmp/$1 attach -t $1 -r
-}
-
 bindkey -e
 
 alias ll="ls -al"
 export LANG="en_US.utf-8"
 export LC_ALL="en_US.utf-8"
 
-tmux-start
-
+alias tg="tmux-join amast"
+alias td="tmux kill-session"
+alias reload="source ~/.zshrc"
